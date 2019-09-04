@@ -11,7 +11,7 @@ class User(models.Model):
     postcode = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
     country = models.CharField(max_length=20)
-    joinedDate = models.DateField()
+    #joinedDate = models.DateField()
 
     def __str__(self):
         return self.email
