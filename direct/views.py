@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from direct.forms import RegistrationForm
+from direct.forms import CustomerCreationForm, SellerCreationForm
 from django.views.generic import TemplateView
 
 
 def register(request):
-    form = RegistrationForm(request.POST)
+    form = CustomerCreationForm(request.POST)
     if form.is_valid():
         form.save()
         return HttpResponseRedirect('/admin/')
