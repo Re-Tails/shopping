@@ -11,6 +11,7 @@ def register(request):
         return HttpResponseRedirect('/admin/')
         #For now after the user hits submit, they will be redirected to the admin page.
         #We should make some sort of confirmation page, or maybe redirect them to the login page.
-
-    context={'form': form}
-    return render(request, 'registration.html', {'form':form})
+    context = {
+        'title': "Register",
+        'form': form}
+    return render(request, 'register.html', context)
