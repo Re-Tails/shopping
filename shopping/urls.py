@@ -18,6 +18,7 @@ from django.urls import path
 from direct import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('register/', views.register),
+    path('admin/', admin.site.urls, name='admin'),
+    path('registerCustomer/', views.registerCustomer, name='register-customer'),
+    path('registerSeller/', views.registerSeller, name='register-seller'),
 ]

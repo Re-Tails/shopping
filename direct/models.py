@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 class User(AbstractUser):
-    username = models.CharField(max_length = 32, default="Username", unique=True)
+    username = models.CharField(max_length = 32, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     password = models.CharField(max_length=32)
     isSeller = models.BooleanField(default=False)
@@ -22,7 +22,7 @@ class User(AbstractUser):
 
 class Customer(User):
     firstName = models.CharField(max_length=30)
-    lastName = models.CharField(max_length=30)
+    lastName = models.CharField(max_length=30, blank=True, null=True)
 
 class Seller(User):
     sellerName = models.CharField(max_length=30)
@@ -31,13 +31,13 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.IntegerField()
-    description = models.TextField(default="No description provided")
+    description = models.TextField(blank=True, null=True)
     photo = models.ImageField(upload_to="products/", null=True, blank=True)
-    category = models.CharField(max_length=30)
-    brand = models.CharField(max_length=30)
+    category = models.CharField(max_length=30, blank=True, null=True)
+    brand = models.CharField(max_length=30, blank=True, null=True)
     rating = models.IntegerField()
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
-    pubDate = models.DateField(name='date publised')
+    pubDate = models.DateField(default=datetime.datetime.now)
 
     def __str__(self):
         return self.name

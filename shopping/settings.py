@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'direct.User'
@@ -131,3 +132,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = 'direct/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'direct/media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
