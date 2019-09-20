@@ -1,17 +1,23 @@
 from django.shortcuts import render, redirect
 from direct.forms import CustomerCreationForm, SellerCreationForm
 from django.views.generic import TemplateView
+from django.contrib import messages
 
+def index(request):
+    return render(request, 'index.html')
 
 def registerCustomer(request):
     if request.method == "POST":
         form = CustomerCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('admin')
-        #For now after the user hits submit, they will be redirected to the admin page.
-        #We should make some sort of confirmation page, or maybe redirect them to the login page.
-    form = CustomerCreationForm()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'{username} just created a customer account.')
+            return redirect('login')
+        else:
+            messages.warning(request, 'Invalid information entered')
+    else:
+        form = CustomerCreationForm()
     context = {
         'title': "Register",
         'form': form}
@@ -22,10 +28,13 @@ def registerSeller(request):
         form = SellerCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('admin')
-        #For now after the user hits submit, they will be redirected to the admin page.
-        #We should make some sort of confirmation page, or maybe redirect them to the login page.
-    form = SellerCreationForm()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'{username} just created a seller account.')
+            return redirect('login')
+        else:
+            messages.warning(request, 'Invalid information entered')
+    else:
+        form = CustomerCreationForm()
     context = {
         'title': "Register",
         'form': form}

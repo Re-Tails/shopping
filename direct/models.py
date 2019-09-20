@@ -8,7 +8,6 @@ class User(AbstractUser):
     username = models.CharField(max_length = 32, unique=True)
     email = models.EmailField(_('email address'), unique=True)
     password = models.CharField(max_length=32)
-    isSeller = models.BooleanField(default=False)
     phoneNumber = models.CharField(max_length=15)
     street = models.CharField(max_length=50)
     suburb = models.CharField(max_length=20)
@@ -23,9 +22,11 @@ class User(AbstractUser):
 class Customer(User):
     firstName = models.CharField(max_length=30)
     lastName = models.CharField(max_length=30, blank=True, null=True)
+    isSeller = models.BooleanField(default=False)
 
 class Seller(User):
     sellerName = models.CharField(max_length=30)
+    isSeller = models.BooleanField(default=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
