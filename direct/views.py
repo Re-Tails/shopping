@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from direct.forms import CustomerCreationForm, SellerCreationForm
+from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreationForm
 from django.views.generic import TemplateView
 from django.contrib import messages
 
@@ -39,3 +39,18 @@ def registerSeller(request):
         'title': "Register",
         'form': form}
     return render(request, 'register.html', context)
+
+def addProduct(request):
+    if request.method == "POST":
+        form = ProductCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            messages.warning(request, 'Invalid information enterred')
+    else:
+        form = ProductCreationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'addProduct.html', context)

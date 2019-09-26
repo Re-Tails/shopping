@@ -1,0 +1,8 @@
+{% block content %}
+  <h2>PRODUCT</h2>
+  <form enctype='multipart/form-data' method="POST" class="add-product">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type='submit'>Add</button>
+  </form>
+{% endblock %}
