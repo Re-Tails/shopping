@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from direct.forms import CustomerCreationForm, SellerCreationForm
 from django.views.generic import TemplateView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -39,3 +40,7 @@ def registerSeller(request):
         'title': "Register",
         'form': form}
     return render(request, 'register.html', context)
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
