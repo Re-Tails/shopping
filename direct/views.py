@@ -29,14 +29,16 @@ def registerSeller(request):
     if request.method == "POST":
         form = SellerCreationForm(request.POST)
         if form.is_valid():
-            form.save()
             username = form.cleaned_data.get('username')
+            form = form.save(commit=False)
+            form.isSeller = True
+            form.save()
             messages.success(request, f'{username} just created a seller account.')
             return redirect('login')
         else:
             messages.warning(request, 'Invalid information entered')
     else:
-        form = CustomerCreationForm()
+        form = SellerCreationForm()
     context = {
         'title': "Register",
         'form': form}
@@ -46,11 +48,10 @@ def registerSeller(request):
 def profile(request):
     return render(request, 'profile.html')
 
-
+@login_required
 def addProduct(request):
-    for seller in Seller.objects.all():
-        if seller.pk == request.user.pk:
-            break
+    if request.user.isSeller:
+        pass
     else:
         return redirect('login')
     if request.method == "POST":
