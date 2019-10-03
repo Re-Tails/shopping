@@ -50,3 +50,10 @@ class Card(models.Model):
 
     def __str__(self):
         return self.number
+
+class Transaction(models.Model):
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    paidTime = models.DateTimeField(default=datetime.datetime.now)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE)
