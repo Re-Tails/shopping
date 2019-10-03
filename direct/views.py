@@ -69,3 +69,6 @@ def addProduct(request):
         'form': form
     }
     return render(request, 'addProduct.html', context)
+
+def viewProduct(request, id):
+    return render(request, 'viewProduct.html')
