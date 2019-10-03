@@ -70,11 +70,16 @@ def addProduct(request):
     }
     return render(request, 'addProduct.html', context)
 
-#View product photo url is not working properly. Also it is currently redirecting the user to
-#the login page if they click buy. We should change it to the payment page
 def viewProduct(request, id):
     data = Product.objects.all().filter(pk=id)
     context={
         'data': data
     }
     return render(request, 'viewProduct.html', context)
+
+def paymentPage(request, id):
+    data = Product.objects.all().filter(pk=id)
+    context={
+        'data': data
+    }
+    return render(request, 'paymentForm.html', context)

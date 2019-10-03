@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Payment page placeholder</h1>
+{% for product in data %}
+<p>
+  {{ product.name }}
+  <br>
+  {{ product.id }}
+</p>
+
+{% endfor %}
+{% endblock %}
