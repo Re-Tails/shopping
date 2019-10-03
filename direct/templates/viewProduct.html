@@ -1,1 +1,29 @@
-<h2>Hello world</h2>
+{% extends "base.html" %}
+{% block content %}
+{% for product in data %}
+<div class="content-section">
+  <legend class="border-bottom mb-2">{{ product.name }} | Rating:
+  {{ product.rating }}/10 | Price: ${{ product.price }}</legend>
+  <img src={{ product.photo.url }} class="img-thumbnail" height="256" width="256"/>
+  <p>
+    <br>
+    <u><b>Description:</b></u>
+    <br>
+    {{ product.description }}
+    <br>
+    <br>
+      <b>Brand:</b> {{ product.brand }}
+    <br>
+      <b>Category:</b> {{ product.category }}
+    <br>
+    <b>Contact seller:</b> {{ product.seller }}
+      <a href="/login">
+        <button style="float: right; width: 100px">Buy</button>
+      </a>
+    <br>
+      <br>
+    <b>Listed on:</b> {{ product.pubDate }}
+  </p>
+</div>
+{% endfor %}
+{% endblock %}

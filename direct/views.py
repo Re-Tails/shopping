@@ -3,7 +3,7 @@ from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreati
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from direct.models import Seller
+from direct.models import Seller, Product
 
 def index(request):
     return render(request, 'index.html')
@@ -70,5 +70,11 @@ def addProduct(request):
     }
     return render(request, 'addProduct.html', context)
 
+#View product photo url is not working properly. Also it is currently redirecting the user to
+#the login page if they click buy. We should change it to the payment page
 def viewProduct(request, id):
-    return render(request, 'viewProduct.html')
+    data = Product.objects.all().filter(pk=id)
+    context={
+        'data': data
+    }
+    return render(request, 'viewProduct.html', context)
