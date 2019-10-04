@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% for product in products %}
+    <article class="content-section">
+        <h3 class="article-title">{{ product.name }}</h3>
+        <br>
+        <p class="article-content">By <a href= "{% url 'sellerPage' product.seller %}">{{ product.seller }}</a> on {{ product.pubDate }}</p>
+    </article>
+{% endfor %}
+{% endblock %}

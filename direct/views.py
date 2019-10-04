@@ -3,7 +3,7 @@ from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreati
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from direct.models import Seller
+from direct.models import Seller, Product
 
 def index(request):
     return render(request, 'index.html')
@@ -69,3 +69,19 @@ def addProduct(request):
         'form': form
     }
     return render(request, 'addProduct.html', context)
+
+def index(request):
+    products = Product.objects.all()
+    context = {
+        'title' : 'Home',
+        'products' : products
+    }
+    return render(request, 'index.html', context)
+
+def seller(request, seller):
+    products = Product.objects.filter(sellerName = seller)
+    context = {
+        'title' : 'Home',
+        'products' : products
+    }
+    return render(request, 'index.html', context)

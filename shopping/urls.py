@@ -27,5 +27,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
     path('profile/', direct_views.profile, name='profile'),
     path('addProduct/', direct_views.addProduct, name='add-product'),
+    path('', direct_views.index, name='index'),
+    path('seller/<str:seller>', direct_views.addProduct, name='sellerPage'),
     #path('profile/<int:id>', direct_views.sellerPage, name='seller-page'),
 ]
