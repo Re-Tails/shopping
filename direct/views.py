@@ -78,8 +78,9 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-def seller(request, seller):
-    products = Product.objects.filter(sellerName = seller)
+def seller(request, sellerName):
+    seller = Seller.objects.get(sellerName = sellerName).user_ptr_id
+    products = Product.objects.all().filter(seller = seller)
     context = {
         'title' : 'Home',
         'products' : products
