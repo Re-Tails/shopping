@@ -83,3 +83,19 @@ def paymentPage(request, id):
         'data': data
     }
     return render(request, 'paymentForm.html', context)
+def index(request):
+    products = Product.objects.all()
+    context = {
+        'title' : 'Home',
+        'products' : products
+    }
+    return render(request, 'index.html', context)
+
+def seller(request, sellerName):
+    seller = Seller.objects.get(sellerName = sellerName).user_ptr_id
+    products = Product.objects.all().filter(seller = seller)
+    context = {
+        'title' : 'Home',
+        'products' : products
+    }
+    return render(request, 'index.html', context)

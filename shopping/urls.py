@@ -29,5 +29,7 @@ urlpatterns = [
     path('addProduct/', direct_views.addProduct, name='add-product'),
     path('viewProduct/<int:id>', direct_views.viewProduct, name='view-product'),
     path('paymentPage/<int:id>', direct_views.paymentPage, name='payment-page'),
+    path('', direct_views.index, name='index'),
+    path('seller/<str:sellerName>', direct_views.seller, name='sellerPage'),
     #path('profile/<int:id>', direct_views.sellerPage, name='seller-page'),
 ]

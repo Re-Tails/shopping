@@ -17,15 +17,15 @@ class User(AbstractUser):
     country = models.CharField(max_length=20)
     joinedDate = models.DateTimeField(default=datetime.datetime.now)
 
-    def __str__(self):
-        return self.email
-
 class Customer(User):
     firstName = models.CharField(max_length=30)
     lastName = models.CharField(max_length=30, blank=True, null=True)
 
 class Seller(User):
     sellerName = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.sellerName
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
