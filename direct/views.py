@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreationForm
+from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreationForm, CardCreationForm
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from direct.models import Seller, Product
+from direct.models import Seller, Product, Customer
 
 def index(request):
     return render(request, 'index.html')
@@ -77,9 +77,14 @@ def viewProduct(request, id):
     }
     return render(request, 'viewProduct.html', context)
 
+@login_required
 def paymentPage(request, id):
+    if request.user.isSeller:
+        return redirect('login')
     data = Product.objects.all().filter(pk=id)
+    customer = Customer.objects.all().filter(user_ptr_id=request.user.pk)
     context={
-        'data': data
+        'data': data,
+        'customer': customer
     }
     return render(request, 'paymentForm.html', context)

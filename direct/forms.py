@@ -1,7 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Customer, Seller, Product
+from .models import Customer, Seller, Product, Card
 from .models import User as CustomUser
+
+class CardCreationForm(forms.ModelForm):
+    class Meta:
+        model = Card
+        fields = ["number", "name", "expiryDate", "cvv"]
 
 class ProductCreationForm(forms.ModelForm):
     class Meta:
