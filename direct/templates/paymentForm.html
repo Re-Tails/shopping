@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 {% for product in data %}
+{% for cus in customer %}
 <div class="content-section">
   <legend class="border-bottom mb-2">Purchasing: {{ product.name }}</legend>
   <font size="+1">Customer Details</font>
   <p>
     <font size="-1">
-    <b>Username:</b> {{ user.username }}
+    <b>Name:</b> {{ cus.firstName }} {{ cus.lastName }}
     <br>
     <b>Street:</b> {{ user.street }}
     <br>
@@ -22,5 +23,6 @@
   <font size="+1"><b>Payment Details</b></font>
 </div>
 
+{% endfor %}
 {% endfor %}
 {% endblock %}

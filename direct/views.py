@@ -82,7 +82,7 @@ def paymentPage(request, id):
     if request.user.isSeller:
         return redirect('login')
     data = Product.objects.all().filter(pk=id)
-    customer = Customer.objects.all().filter(user_ptr_id=request.user.pk)
+    customer = Customer.objects.all().filter(pk=request.user.pk)
     context={
         'data': data,
         'customer': customer
