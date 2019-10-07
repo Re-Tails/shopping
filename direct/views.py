@@ -88,11 +88,23 @@ def paymentPage(request, id):
             try:
                 temp = Card.objects.get(number=form.cleaned_data.get('number'))
             except Card.DoesNotExist:
-                form.save()
-                #change this later to another page where it will confirm payment
+                tempForm = form.save()
+                tempTrans = Transaction()
+                tempTrans.total = Product.objects.get(id=id).price
+                tempTrans.product = Product.objects.get(id=id)
+                tempTrans.customer = Customer.objects.get(pk=request.user.pk)
+                tempTrans.card = tempForm
+                tempTrans.save()
+                #update redirect to a confirmation page
                 return redirect('login')
             else:
-                #do the same here
+                #update redirect to a confirmation page
+                tempTrans = Transaction()
+                tempTrans.total = Product.objects.get(id=id).price
+                tempTrans.product = Product.objects.get(id=id)
+                tempTrans.customer = Customer.objects.get(pk=request.user.pk)
+                tempTrans.card = temp
+                tempTrans.save()
                 return redirect('profile')
     else:
         form = CardCreationForm()
