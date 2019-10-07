@@ -3,7 +3,7 @@
 {% for product in products %}
     <article class="content-section">
         <h3 class="article-title">
-            <a href= "{% url 'sellerPage' product.seller %}"> 
+            <a href= "{% url 'view-product' product.id %}"> 
                 {{ product.name }} 
             </a>
         </h3>
