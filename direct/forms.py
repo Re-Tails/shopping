@@ -7,6 +7,7 @@ class CardCreationForm(forms.ModelForm):
     class Meta:
         model = Card
         fields = ["number", "name", "expiryDate", "cvv"]
+        labels = {"number":"Card Number", "expiryDate":"Expiry Date", "cvv":"CVV"}
 
 class ProductCreationForm(forms.ModelForm):
     class Meta:

@@ -3,7 +3,7 @@ from direct.forms import CustomerCreationForm, SellerCreationForm, ProductCreati
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from direct.models import Seller, Product, Customer
+from direct.models import Seller, Product, Customer, Transaction, Card
 
 def index(request):
     return render(request, 'index.html')
@@ -81,10 +81,27 @@ def viewProduct(request, id):
 def paymentPage(request, id):
     if request.user.isSeller:
         return redirect('login')
+    #added
+    if request.method == "POST":
+        form = CardCreationForm(request.POST)
+        if form.is_valid():
+            try:
+                temp = Card.objects.get(number=form.cleaned_data.get('number'))
+            except Card.DoesNotExist:
+                form.save()
+                #change this later to another page where it will confirm payment
+                return redirect('login')
+            else:
+                #do the same here
+                return redirect('profile')
+    else:
+        form = CardCreationForm()
+    #end added
     data = Product.objects.all().filter(pk=id)
     customer = Customer.objects.all().filter(pk=request.user.pk)
     context={
         'data': data,
-        'customer': customer
+        'customer': customer,
+        'form': form
     }
     return render(request, 'paymentForm.html', context)

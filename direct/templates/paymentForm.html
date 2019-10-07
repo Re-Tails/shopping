@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
 {% for product in data %}
 {% for cus in customer %}
 <div class="content-section">
-  <legend class="border-bottom mb-2">Purchasing: {{ product.name }}</legend>
-  <font size="+1">Customer Details</font>
+  <legend class="border-bottom mb-2"><b>Purchasing: {{ product.name }}</b></legend>
+  <font size="+1"><b>Customer Details</b></font>
   <p>
     <font size="-1">
     <b>Name:</b> {{ cus.firstName }} {{ cus.lastName }}
@@ -21,6 +22,11 @@
     </font>
   </p>
   <font size="+1"><b>Payment Details</b></font>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type"submit">Pay Now</button>
+  </form>
 </div>
 
 {% endfor %}
