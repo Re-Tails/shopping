@@ -109,14 +109,18 @@ def paymentPage(request, id):
     else:
         form = CardCreationForm()
     #end added
-    data = Product.objects.all().filter(pk=id)
+    product = Product.objects.all().filter(pk=id)
+    print(product)
+    
     customer = Customer.objects.all().filter(pk=request.user.pk)
+    print(customer)
     context={
-        'data': data,
-        'customer': customer,
+        'products': product,
+        'customers': customer,
         'form': form
     }
     return render(request, 'paymentForm.html', context)
+
 def index(request):
     products = Product.objects.all()
     context = {
