@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for transaction, product, customer in zipdata %}
+  <article class="content-section">
+
+    <h3 class="article-title">
+       Product: {{ product.name }}
+    </h3>
+    <p class="article-content">
+      <b>Purchase date:</b> {{ transaction.paidTime }}
+      <b>Price</b>: ${{ product.price }}
+      <b>Seller</b>: {{ product.seller }}
+      <b>Buyer</b>: {{ customer.firstName }}
+    </p>
+  </article>
+{% endfor %}
+
+{% endblock %}

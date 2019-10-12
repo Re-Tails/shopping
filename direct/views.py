@@ -150,14 +150,18 @@ def viewTransaction(request):
             for product in allProducts:
                 if transaction.product_id == product.pk:
                     transactions.append(transaction)
+                    products.append(product)
+                    customers.append(Customer.objects.get(pk=transaction.customer_id))
 
-        print(transactions)
+        zipdata = zip(transactions, products, customers)
 
         context = {
             'transactions': transactions,
             'customers': customers,
             'products': products,
+            'zipdata': zipdata
         }
+        return render(request, 'viewTransactionSeller.html', context)
     else:
         products = []
         list = []
@@ -170,4 +174,4 @@ def viewTransaction(request):
             'customers': customers,
             'products': products,
         }
-    return render(request, 'viewTransaction.html', context)
+        return render(request, 'viewTransaction.html', context)
