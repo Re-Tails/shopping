@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for customer in customers %}
+{% for transaction in transactions %}
+{% for product in products %}
+{% if forloop.counter == forloop.parentloop.counter %}
+<article class="content-section">
+
+  <h3 class="article-title">
+     Product: {{ product.name }}
+  </h3>
+  <p class="article-content">
+    <b>Purchase date:</b> {{ transaction.paidTime }}
+    <b>Price</b>: ${{ product.price }}
+    <b>Seller</b>: {{ product.seller }}
+    <b>Buyer</b>: {{ customer.firstName }}
+  </p>
+</article>
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+
+{% endblock %}
