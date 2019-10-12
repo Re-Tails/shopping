@@ -141,7 +141,23 @@ def seller(request, sellerName):
 @login_required
 def viewTransaction(request):
     if request.user.isSeller:
-        return redirect('login')
+        allProducts = Product.objects.all().filter(seller = request.user.pk)
+        allTransactions = Transaction.objects.all()
+        customers = []
+        products = []
+        transactions = []
+        for transaction in allTransactions:
+            for product in allProducts:
+                if transaction.product_id == product.pk:
+                    transactions.append(transaction)
+
+        print(transactions)
+
+        context = {
+            'transactions': transactions,
+            'customers': customers,
+            'products': products,
+        }
     else:
         products = []
         list = []
@@ -149,12 +165,9 @@ def viewTransaction(request):
         customers = Customer.objects.all().filter(pk = request.user.pk)
         for transaction in transactions:
             products.append(Product.objects.get(pk = transaction.product_id))
-
-        zip_data = zip(products, transactions, customers)
         context = {
             'transactions': transactions,
             'customers': customers,
             'products': products,
-            'zip_data': zip_data
         }
     return render(request, 'viewTransaction.html', context)

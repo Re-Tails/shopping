@@ -8,10 +8,13 @@
 <article class="content-section">
 
   <h3 class="article-title">
-     ID: {{ transaction.product_id }} Name: {{ product.name }}
+     Product: {{ product.name }}
   </h3>
   <p class="article-content">
-    Name: {{ customer.firstName }}
+    <b>Purchase date:</b> {{ transaction.paidTime }}
+    <b>Price</b>: ${{ product.price }}
+    <b>Seller</b>: {{ product.seller }}
+    <b>Buyer</b>: {{ customer.firstName }}
   </p>
 </article>
 {% endif %}
