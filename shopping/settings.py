@@ -135,5 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'direct/media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'

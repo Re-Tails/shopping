@@ -36,7 +36,7 @@ class Product(models.Model):
     category = models.CharField(max_length=30, blank=True, null=True)
     brand = models.CharField(max_length=30, blank=True, null=True)
     rating = models.IntegerField()
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller_fk = models.ForeignKey(Seller, on_delete=models.CASCADE, null=True)
     pubDate = models.DateField(default=datetime.datetime.now)
 
     def __str__(self):
@@ -54,6 +54,6 @@ class Card(models.Model):
 class Transaction(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2)
     paidTime = models.DateTimeField(default=datetime.datetime.now)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    product_fk = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    customer_fk = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    card_fk = models.ForeignKey(Card, on_delete=models.CASCADE, null=True)

@@ -4,7 +4,9 @@
 <div class="content-section">
   <legend class="border-bottom mb-2">{{ product.name }} | Rating:
   {{ product.rating }}/10 | Price: ${{ product.price }}</legend>
+  {% if product.photo %}
   <img src={{ product.photo.url }} class="img-thumbnail" height="256" width="256"/>
+  {% endif %}
   <p>
     <br>
     <u><b>Description:</b></u>
@@ -16,7 +18,7 @@
     <br>
       <b>Category:</b> {{ product.category }}
     <br>
-    <b>Contact seller:</b> {{ product.seller }}
+    <b>Contact seller:</b> {{ product.seller_fk }}
       <a href="/paymentPage/{{product.id}}">
         <button style="float: right; width: 100px">Buy</button>
       </a>

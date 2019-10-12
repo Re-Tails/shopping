@@ -58,9 +58,9 @@ def addProduct(request):
         form = ProductCreationForm(request.POST, request.FILES)
         if form.is_valid():
             temp = form.save(commit=False)
-            temp.seller_id = request.user.pk
+            temp.seller_fk_id = request.user.pk
             temp = temp.save()
-            return redirect('login')
+            return redirect('index')
         else:
             messages.warning(request, 'Invalid information enterred')
     else:
@@ -131,7 +131,7 @@ def index(request):
 
 def seller(request, sellerName):
     seller = Seller.objects.get(sellerName = sellerName).user_ptr_id
-    products = Product.objects.all().filter(seller = seller)
+    products = Product.objects.all().filter(seller_fk = seller)
     context = {
         'title' : 'Home',
         'products' : products
