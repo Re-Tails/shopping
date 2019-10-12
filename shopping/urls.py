@@ -30,6 +30,6 @@ urlpatterns = [
     path('paymentPage/<int:id>', direct_views.paymentPage, name='payment-page'),
     path('', direct_views.index, name='index'),
     path('seller/<str:sellerName>', direct_views.seller, name='sellerPage'),
-    path('viewTransaction', direct_views.viewTransaction, name='view-transaction'),
+    path('viewTransaction/', direct_views.viewTransaction, name='view-transaction'),
     #path('profile/<int:id>', direct_views.sellerPage, name='seller-page'),
 ]

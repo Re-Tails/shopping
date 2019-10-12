@@ -90,10 +90,12 @@ def paymentPage(request, id):
             except Card.DoesNotExist:
                 tempForm = form.save()
                 tempTrans = Transaction()
+                print(id)
                 tempTrans.total = Product.objects.get(id=id).price
-                tempTrans.product = Product.objects.get(id=id)
-                tempTrans.customer = Customer.objects.get(pk=request.user.pk)
-                tempTrans.card = tempForm
+                tempTrans.product_fk = Product.objects.get(id=id)
+                tempTrans.customer_fk = Customer.objects.get(pk=request.user.pk)
+                tempTrans.card_fk = tempForm
+                print(tempTrans.total)
                 tempTrans.save()
                 #update redirect to a confirmation page
                 return redirect('login')
@@ -101,9 +103,9 @@ def paymentPage(request, id):
                 #update redirect to a confirmation page
                 tempTrans = Transaction()
                 tempTrans.total = Product.objects.get(id=id).price
-                tempTrans.product = Product.objects.get(id=id)
-                tempTrans.customer = Customer.objects.get(pk=request.user.pk)
-                tempTrans.card = temp
+                tempTrans.product_fk = Product.objects.get(id=id)
+                tempTrans.customer_fk = Customer.objects.get(pk=request.user.pk)
+                tempTrans.card_fk = temp
                 tempTrans.save()
                 return redirect('profile')
     else:
@@ -148,10 +150,10 @@ def viewTransaction(request):
         transactions = []
         for transaction in allTransactions:
             for product in allProducts:
-                if transaction.product_id == product.pk:
+                if transaction.product_fk_id == product.pk:
                     transactions.append(transaction)
                     products.append(product)
-                    customers.append(Customer.objects.get(pk=transaction.customer_id))
+                    customers.append(Customer.objects.get(pk=transaction.customer_fk_id))
 
         zipdata = zip(transactions, products, customers)
 
@@ -168,7 +170,7 @@ def viewTransaction(request):
         transactions = Transaction.objects.all().filter(customer_id = request.user.pk)
         customers = Customer.objects.all().filter(pk = request.user.pk)
         for transaction in transactions:
-            products.append(Product.objects.get(pk = transaction.product_id))
+            products.append(Product.objects.get(pk = transaction.product_fk_id))
         context = {
             'transactions': transactions,
             'customers': customers,
