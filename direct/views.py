@@ -141,7 +141,7 @@ def seller(request, sellerName):
 @login_required
 def viewTransaction(request):
     if request.user.isSeller:
-        allProducts = Product.objects.all().filter(seller = request.user.pk)
+        allProducts = Product.objects.all().filter(seller_fk = request.user.pk)
         allTransactions = Transaction.objects.all()
         customers = []
         products = []
