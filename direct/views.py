@@ -111,7 +111,7 @@ def paymentPage(request, id):
     #end added
     product = Product.objects.all().filter(pk=id)
     print(product)
-    
+
     customer = Customer.objects.all().filter(pk=request.user.pk)
     print(customer)
     context={
@@ -137,3 +137,24 @@ def seller(request, sellerName):
         'products' : products
     }
     return render(request, 'index.html', context)
+
+@login_required
+def viewTransaction(request):
+    if request.user.isSeller:
+        return redirect('login')
+    else:
+        products = []
+        list = []
+        transactions = Transaction.objects.all().filter(customer_id = request.user.pk)
+        customers = Customer.objects.all().filter(pk = request.user.pk)
+        for transaction in transactions:
+            products.append(Product.objects.get(pk = transaction.product_id))
+
+        zip_data = zip(products, transactions, customers)
+        context = {
+            'transactions': transactions,
+            'customers': customers,
+            'products': products,
+            'zip_data': zip_data
+        }
+    return render(request, 'viewTransaction.html', context)
