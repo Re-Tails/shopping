@@ -72,7 +72,7 @@ def addProduct(request):
 
 def viewProduct(request, id):
     data = Product.objects.all().filter(pk=id)
-    context={
+    context = {
         'data': data
     }
     return render(request, 'viewProduct.html', context)
@@ -177,3 +177,16 @@ def viewTransaction(request):
             'products': products,
         }
         return render(request, 'viewTransaction.html', context)
+
+@login_required
+def deleteProduct(request, id):
+    product = Product.objects.get(id = id)
+    if (request.user.id == product.seller_fk_id):
+        context = {
+            'title': "Delete Listing",
+            'product': product
+        }
+        product.delete()
+        return redirect('index')
+    else:
+        return redirect('index')

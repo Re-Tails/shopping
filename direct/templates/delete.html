@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="content-section">
+  <legend class="border-bottom mb-1">
+      Delete {{ product.name }}
+  </legend>
+  <p>By 
+    <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }} </a> 
+      on {{ product.pubDate }}
+    <br>
+    <h3>Price: ${{ product.price }}</h3>
+  <br>
+  {% if product.photo %}
+  <img src={{ product.photo.url }} class="img-thumbnail" height="256" width="256"/>
+  {% endif %}
+  <br>
+  <b>Description:</b>
+    {{ product.description }}
+  <br>
+    <b>Brand:</b> {{ product.brand }}
+  <br>
+    <b>Category:</b> {{ product.category }}
+  <br><br>
+  <b>Rating:</b> {{ product.rating }}/10
+  <br>
+  <b>Contact seller:</b> 
+  <a href= "{% url 'sellerPage' product.seller_fk %}"> 
+    {{ product.seller_fk }} 
+  </a> 
+</p>
+</article>
+{% endblock %}
