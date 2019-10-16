@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% for product in products %}
+    <article class="content-section">
+        <h3 class="article-title">
+            <a href= "{% url 'view-product' product.id %}"> 
+                {{ product.name }} 
+            </a>
+            {% if product.photo %}
+            <div>
+                <br>
+                <img class="img-thumbnail" src='{{ product.photo.url }}' width="30%">
+            </div>
+            {% endif %}
+        </h3>
+        <p>
+            By <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }}</a>
+            <br>
+            on {{ product.pubDate }}
+        </p>
+    </article>
+{% endfor %}
+{% endblock %}
+
+{% block sidebar %}
+<div class="content-section">
+    <h3>{{ seller }}</h3>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="font-weight-bold">Email:</div>
+            <a href="mailto:{{seller.email}}">
+                {{ seller.email }}
+            </a>
+        </li>
+        <li class="list-group-item">
+            <div class="font-weight-bold">Phone:</div>
+            {{ seller.phoneNumber }}
+        </li>
+        <li class="list-group-item">
+            <div class="font-weight-bold">Address:</div>
+            {{ seller.street }}, {{ seller.suburb }}
+        </li>
+    </ul>
+</div>
+{% endblock %}

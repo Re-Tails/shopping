@@ -132,13 +132,14 @@ def index(request):
     return render(request, 'index.html', context)
 
 def seller(request, sellerName):
-    seller = Seller.objects.get(sellerName = sellerName).user_ptr_id
-    products = Product.objects.all().filter(seller_fk = seller)
+    seller = Seller.objects.get(sellerName = sellerName)
+    products = Product.objects.all().filter(seller_fk = seller.id)
     context = {
         'title' : 'Home',
+        'seller' : seller,
         'products' : products
     }
-    return render(request, 'index.html', context)
+    return render(request, 'sellerPublic.html', context)
 
 @login_required
 def viewTransaction(request):

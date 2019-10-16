@@ -6,10 +6,17 @@
             <a href= "{% url 'view-product' product.id %}"> 
                 {{ product.name }} 
             </a>
+            {% if product.photo %}
+                <div>
+                    <br>
+                    <img class="img-thumbnail" src='{{ product.photo.url }}' width="30%">
+                </div>
+            {% endif %}
         </h3>
-        <p class="article-content">
-            By <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }}
-            </a> on {{ product.pubDate }}
+        <p>
+            By <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }}</a>
+            <br>
+            on {{ product.pubDate }}
         </p>
     </article>
 {% endfor %}
