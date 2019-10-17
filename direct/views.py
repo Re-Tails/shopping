@@ -175,7 +175,7 @@ def viewTransaction(request):
     else:
         products = []
         list = []
-        transactions = Transaction.objects.all().filter(customer_id = request.user.pk)
+        transactions = Transaction.objects.all().filter(customer_fk = request.user.pk)
         customers = Customer.objects.all().filter(pk = request.user.pk)
         for transaction in transactions:
             products.append(Product.objects.get(pk = transaction.product_fk_id))
