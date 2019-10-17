@@ -63,6 +63,7 @@ def addProduct(request):
     if request.user.isSeller:
         pass
     else:
+        messages.warning(request, 'You need to be a seller to add a product.')
         return redirect('login')
     if request.method == "POST":
         form = ProductCreationForm(request.POST, request.FILES)
@@ -90,6 +91,7 @@ def viewProduct(request, id):
 @login_required
 def paymentPage(request, id):
     if request.user.isSeller:
+        messages.warning(request, 'Only customer accounts could purchase products')
         return redirect('login')
     #added
     if request.method == "POST":

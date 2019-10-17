@@ -20,8 +20,9 @@
           <button>View Transactions</button>
         </a>
       </p>
+      {% if user.isSeller %}
+      <legend class="border-bottom mb-2"><b>My Products</b></legend>
       {% for product in products %}
-      <legend class="border-bottom mb-2"><b>My Product</b></legend>
               <h3 class="article-title">
                   <a href= "{% url 'view-product' product.id %}">
                       {{ product.name }}
@@ -34,10 +35,10 @@
                   {% endif %}
               </h3>
               <p>
-                  By <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }}</a>
-                  <br>
                   on {{ product.pubDate }}
               </p>
+              <div class="border-bottom mb-2"></div>
       {% endfor %}
+      {% endif %}
     </div>
 {% endblock %}
