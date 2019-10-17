@@ -108,7 +108,7 @@ def paymentPage(request, id):
                 print(tempTrans.total)
                 tempTrans.save()
                 #update redirect to a confirmation page
-                return redirect('login')
+                return redirect('paymentConfirm')
             else:
                 #update redirect to a confirmation page
                 tempTrans = Transaction()
@@ -117,7 +117,7 @@ def paymentPage(request, id):
                 tempTrans.customer_fk = Customer.objects.get(pk=request.user.pk)
                 tempTrans.card_fk = temp
                 tempTrans.save()
-                return redirect('profile')
+                return redirect('paymentConfirm')
     else:
         form = CardCreationForm()
     #end added
@@ -201,3 +201,6 @@ def deleteProduct(request, id):
         return redirect('index')
     else:
         return redirect('index')
+
+def paymentConfirm(request):
+    return render(request, 'paymentConfirm.html')
