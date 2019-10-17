@@ -46,7 +46,14 @@ def registerSeller(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html')
+    if request.user.isSeller:
+        currentUser = Seller.objects.get(pk=request.user.pk)
+    else:
+        currentUser = Customer.objects.get(pk=request.user.pk)
+    context = {
+        'currentUser': currentUser
+    }
+    return render(request, 'profile.html', context)
 
 @login_required
 def addProduct(request):

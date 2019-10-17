@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
+    <div class="content-section">
+      <legend class="border-bottom mb-2"><b>My Profile</b></legend>
+      <p>
+        <font size="-1">
+          <b>Username:</b> {{ user.username }}
+          <br>
+          <b>Name:</b> {{ currentUser.firstName }} {{ currentUser.lastName}}{{ currentUser.sellerName}}
+          <br>
+          <b>Email:</b> {{ currentUser.email}}
+          <br>
+          <b>Phone Number:</b> {{ currentUser.phoneNumber }}
+          <br>
+          <b>Address:</b> {{ currentUser.street }}, {{ currentUser.suburb }}, {{ currentUser.postcode }}, {{ currentUser.state }}, {{ currentUser.country }}
+        </font>
+      </p>
+    </div>
 {% endblock %}
