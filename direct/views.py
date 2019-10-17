@@ -46,12 +46,15 @@ def registerSeller(request):
 
 @login_required
 def profile(request):
+    products = []
     if request.user.isSeller:
         currentUser = Seller.objects.get(pk=request.user.pk)
+        products = Product.objects.all().filter(seller_fk = request.user.pk)
     else:
         currentUser = Customer.objects.get(pk=request.user.pk)
     context = {
-        'currentUser': currentUser
+        'currentUser': currentUser,
+        'products': products
     }
     return render(request, 'profile.html', context)
 

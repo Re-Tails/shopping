@@ -15,10 +15,29 @@
           <br>
           <b>Address:</b> {{ currentUser.street }}, {{ currentUser.suburb }}, {{ currentUser.postcode }}, {{ currentUser.state }}, {{ currentUser.country }}
         </font>
-        <br>
+        <br> <br>
         <a href="http://127.0.0.1:8000/viewTransaction/">
           <button>View Transactions</button>
         </a>
       </p>
+      {% for product in products %}
+      <legend class="border-bottom mb-2"><b>My Product</b></legend>
+              <h3 class="article-title">
+                  <a href= "{% url 'view-product' product.id %}">
+                      {{ product.name }}
+                  </a>
+                  {% if product.photo %}
+                      <div>
+                          <br>
+                          <img class="img-thumbnail" src='{{ product.photo.url }}' width="30%">
+                      </div>
+                  {% endif %}
+              </h3>
+              <p>
+                  By <a href= "{% url 'sellerPage' product.seller_fk %}"> {{ product.seller_fk }}</a>
+                  <br>
+                  on {{ product.pubDate }}
+              </p>
+      {% endfor %}
     </div>
 {% endblock %}
